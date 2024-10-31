@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>리뷰 수정</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+  <style>
+    /* Basic resets and styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header Image */
+    .header-image {
+      width: 100%;
+      height: 300px; /* Adjust as needed */
+      background: url('[[@{/images/MainIndex.jpg}]]') no-repeat center center;
+      background-size: cover;
+      display: block;
+    }
+
+    .header-image a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* User Buttons */
+    .user-buttons {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 20px;
+      background-color: #f9f9f9;
+    }
+
+    .user-buttons button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+  <style>
+    .container {
+        max-width: 800px; /* 최대 너비 설정 */
+        margin: auto; /* 중앙 정렬 */
+    }
+    textarea {
+        width: 100%; /* 너비를 100%로 설정 */
+        height: 300px; /* 높이를 300px로 설정 (페이지 중간까지) */
+        font-size: 20px; /* 글꼴 크기를 15px로 설정 */
+        resize: vertical; /* 세로 방향으로 크기 조정 가능 */
+    }
+    button {
+        padding: 10px 20px; /* 버튼 패딩 설정 */
+        font-size: 16px; /* 글꼴 크기 설정 */
+        margin-top: 10px; /* 위쪽 여백 추가 */
+        cursor: pointer; /* 커서 변경 */
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/mypage.js" th:src="@{/js/mypage.js}"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<!-- Header Image linking to MainIndex.html -->
+<div class="header-image">
+  <a href="/producttb/home"></a>
+</div>
+
+<!-- User Buttons -->
+<nav id="nav3">
+  <div class="user-buttons">
+    <a href="/teamproject/signin" id="loginButton">Log In</a>
+    <a href="/teamproject/signup" id="signupButton">Sign Up</a>
+    <a href="/teamproject/mypage">My Page</a>
+    <div class="logout hidden">
+      <button id="logoutbtn" onclick="location.href='/teamproject/logout'">로그아웃</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <a href="/producttb/all">ALL</a>
+  <a href="/producttb/daily">DAILY</a>
+  <a href="/producttb/running">RUNNING</a>
+  <a href="/producttb/football">FOOTBALL</a>
+  <a href="/producttb/basketball">BASKETBALL</a>
+  <a href="/producttb/sandal">SANDAL</a>
+  <a href="/producttb/products">SEARCH</a>
+  <a href="/review/list">REVIEW</a>
+</div>
+<div class="container">
+  <h2>리뷰 수정</h2>
+
+  <div th:if="${review != null}">
+    <form th:action="@{/review/{reviewId}/edit(reviewId=${review.review_id})}" method="post">
+      <div>
+        <label for="r_content">리뷰 내용:</label>
+        <textarea id="r_content" name="r_content" th:text="${review.r_content}" required></textarea>
+      </div>
+      <button type="submit">저장</button>
+      <a href="/review/list">
+        <button type="button">취소</button>
+      </a>
+    </form>
+  </div>
+
+  <div th:if="${review == null}">
+    <p>리뷰 정보를 불러오는 데 실패했습니다.</p>
+  </div>
+</div>
+</body>
+</html>
+

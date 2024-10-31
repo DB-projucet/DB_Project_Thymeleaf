@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>signin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/signin.css}">
+    <style>
+        /* Basic resets and styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Image */
+        .header-image {
+            width: 100%;
+            height: 300px; /* Adjust as needed */
+            background: url('[[@{/images/MainIndex.jpg}]]') no-repeat center center;
+            background-size: cover;
+            display: block;
+        }
+
+        .header-image a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* User Buttons */
+        .user-buttons {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .user-buttons button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/mypage.js" th:src="@{/js/mypage.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="container">
+<!-- Header Image linking to MainIndex.html -->
+<div class="header-image">
+    <a href="/producttb/home"></a>
+</div>
+
+<!-- User Buttons -->
+<nav id="nav3">
+    <div class="user-buttons">
+        <a href="/teamproject/signin" id="loginButton">Log In</a>
+        <a href="/teamproject/signup" id="signupButton">Sign Up</a>
+        <a href="/teamproject/mypage">My Page</a>
+        <div class="logout hidden">
+            <button id="logoutbtn" onclick="location.href='/teamproject/logout'">로그아웃</button>
+        </div>
+    </div>
+</nav>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+    <a href="/producttb/all">ALL</a>
+    <a href="/producttb/daily">DAILY</a>
+    <a href="/producttb/running">RUNNING</a>
+    <a href="/producttb/football">FOOTBALL</a>
+    <a href="/producttb/basketball">BASKETBALL</a>
+    <a href="/producttb/sandal">SANDAL</a>
+    <a href="/producttb/products">SEARCH</a>
+    <a href="/review/list">REVIEW</a>
+</div>
+<div class="form-container">
+    <h1>Log In</h1>
+    <form th:action="@{/teamproject/signin}" method="post" th:object="${employees}" onsubmit="return handleLogin();">
+        <div>
+            <label for="memId">ID</label>
+            <input type="text" id="memId" th:field="*{memId}" required />
+        </div>
+        <div>
+            <label for="memPwd">PassWord</label>
+            <input type="password" id="memPwd" th:field="*{memPwd}" required />
+        </div>
+            <div th:if="${errorMessage}" th:text="${errorMessage}" style="color: red; margin-top: 10px;"></div>
+        <div>
+            <button type="submit" id="signinButton">Log In</button>
+        </div>
+    </form>
+    <div th:if="${loginError}" th:text="${loginError}">로그인 실패</div>
+</div>
+</body>
+</html>

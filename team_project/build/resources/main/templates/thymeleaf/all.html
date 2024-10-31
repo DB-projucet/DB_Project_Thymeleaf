@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+
+  <style>
+    /* Basic resets and styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header Image */
+    .header-image {
+      width: 100%;
+      height: 300px; /* Adjust as needed */
+      background: url('[[@{/images/MainIndex.jpg}]]') no-repeat center center;
+      background-size: cover;
+      display: block;
+    }
+
+    .header-image a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* User Buttons */
+    .user-buttons {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 20px;
+      background-color: #f9f9f9;
+    }
+
+    .user-buttons button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/mypage.js" th:src="@{/js/mypage.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<!-- Header Image linking to MainIndex.html -->
+<div class="header-image">
+  <a href="/producttb/home"></a>
+</div>
+
+<!-- User Buttons -->
+<nav id="nav3">
+  <div class="user-buttons">
+    <a href="/teamproject/signin" id="loginButton">Log In</a>
+    <a href="/teamproject/signup" id="signupButton">Sign Up</a>
+    <a href="/teamproject/mypage">My Page</a>
+    <div class="logout hidden">
+      <button id="logoutbtn" onclick="location.href='/teamproject/logout'">로그아웃</button>
+    </div>
+  </div>
+</nav>
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <a href="/producttb/all">ALL</a>
+  <a href="/producttb/daily">DAILY</a>
+  <a href="/producttb/running">RUNNING</a>
+  <a href="/producttb/football">FOOTBALL</a>
+  <a href="/producttb/basketball">BASKETBALL</a>
+  <a href="/producttb/sandal">SANDAL</a>
+  <a href="/producttb/products">SEARCH</a>
+  <a href="/review/list">REVIEW</a>
+</div>
+<!--<div class="container">-->
+<!--  <div class="product-container">-->
+<!--    <div class="product-item" th:each="product : ${products}">-->
+<!--      <img th:src="@{/images/{name}.png(name=${product.p_name})}" alt="${product.p_name}" class="product-image"/>-->
+<!--      <h3 th:text="${product.p_name}"></h3>-->
+<!--      <p th:text="${product.p_price} + ' 원'"></p>-->
+<!--      <button type="button" id="buy">구매하기</button>-->
+<!--      <button type="button" id="review" onclick="window.location.href='/review/list'">리뷰보기</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="container">
+  <div class="product-container">
+    <div class="product-item" th:each="product : ${products}">
+    <h3 th:text="${product.p_type}">Product Type</h3>
+    <img th:src="@{/images/{name}.png(name=${product.p_name})}" alt="${product.p_name}" class="product-image"/>
+    <h3 th:text="${product.p_name}"></h3>
+    <p th:text="${product.p_price} + ' 원'"></p>
+      <script>
+        async function checkLoginAndOrder() {
+          console.log("checkLoginAndOrder 함수 호출됨"); // 함수 실행 확인용
+
+          try {
+            const response = await fetch('/teamproject/check-login', {
+              method: 'GET',
+              credentials: 'include' // 세션 쿠키 포함
+            });
+            console.log("check-login 요청 전송됨"); // 요청 전송 확인용
+
+            const result = await response.json();
+            console.log("check-login 응답:", result); // 응답 결과 확인용
+
+            if (result.isLoggedIn) {
+              console.log("로그인 상태 확인됨");
+              window.location.href = '/buy/order';
+            } else {
+              alert('로그인 후 주문할 수 있습니다');
+              window.location.href = '/teamproject/signin';
+            }
+          } catch (error) {
+            console.error('로그인 확인 오류:', error);
+          }
+        }
+      </script>
+
+      <button type="button" id="buy" onclick="checkLoginAndOrder()">상품 주문</button>
+<!--      <button type="button" id="review" onclick="window.location.href='/review/list'">리뷰 조회</button>-->
+    </div>
+  </div>
+</div>
+</body>
+</html>

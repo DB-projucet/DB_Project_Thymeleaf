@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header Image */
+    .header-image {
+      width: 100%;
+      height: 300px; /* Adjust as needed */
+      background: url('[[@{/images/MainIndex.jpg}]]') no-repeat center center;
+      background-size: cover;
+      display: block;
+    }
+
+    .header-image a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* User Buttons */
+    .user-buttons {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 20px;
+      background-color: #f9f9f9;
+    }
+
+    .user-buttons button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+    .product-select {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    select {
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px;
+      cursor: pointer;
+      width: 80px;
+      text-align: center;
+    }
+    .review-title {
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .review-list {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 30px;
+      background-color: #f9f9f9;
+      width: 100%;
+      max-width: 800px;
+      font-size: 25px;
+    }
+    .review-item {
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+    }
+    .separator {
+      margin: 0 10px;
+    }
+    .star {
+      color: gold;
+      font-size: 20px;
+    }
+    .label {
+      font-weight: bold; /* 라벨을 굵게 설정 */
+    }
+    select {
+      width: 80%;
+      padding: 10px;
+      border: 3px solid black;
+      border-radius: 4px;
+      color: black;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/mypage.js" th:src="@{/js/mypage.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="header-image">
+  <a href="/producttb/home"></a>
+</div>
+
+<!-- User Buttons -->
+<nav id="nav3">
+  <div class="user-buttons">
+    <a href="/teamproject/signin" id="loginButton">Log In</a>
+    <a href="/teamproject/signup" id="signupButton">Sign Up</a>
+    <a href="/teamproject/mypage">My Page</a>
+    <div class="logout hidden">
+      <button id="logoutbtn" onclick="location.href='/teamproject/logout'">로그아웃</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <a href="/producttb/all">ALL</a>
+  <a href="/producttb/daily">DAILY</a>
+  <a href="/producttb/running">RUNNING</a>
+  <a href="/producttb/football">FOOTBALL</a>
+  <a href="/producttb/basketball">BASKETBALL</a>
+  <a href="/producttb/sandal">SANDAL</a>
+  <a href="/producttb/products">SEARCH</a>
+  <a href="/review/list">REVIEW</a>
+</div>
+<div class="container">
+  <h2 class="review-title">REVIEW LIST</h2>
+
+  <div class="product-select">
+    <form action="/review/list" method="get" style="display: flex; align-items: center;">
+      <select name="productName">
+        <option value="">상품 선택</option>
+        <option th:each="productName : ${uniqueProductNames}"
+                th:value="${productName}"
+                th:text="${productName}"
+                th:selected="${productName == pName}"></option>
+      </select>
+      <button type="submit">보기</button>
+    </form>
+  </div>
+
+  <div class="review-list" id="reviewList">
+    <div th:if="${#lists.isEmpty(reviewList)}">
+      <p>등록된 리뷰가 없습니다.</p>
+    </div>
+    <div>
+      <div th:each="review : ${reviewList}" th:if="${review.p_name == pName}" class="review-item">
+        <span class="label">아이디 :</span> <span th:text="${review.mem_id}"></span>
+        <span class="separator">|</span>
+        <span class="label">후기 :</span> <span th:text="${review.r_content}"></span>
+        <span class="separator">|</span>
+        <span class="label">별점 :</span> <span class="star" th:text="${'★'.repeat(review.star_rate)}"></span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
