@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPage</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/mypage.js" th:src="@{/js/mypage.js}"></script>
+</head>
+<body>
+<div class="info_box">
+    <form id="userInfoForm" th:action="@{/teamproject/mypage}" method="post">
+        <p>
+            <span th:text="'ID : ' + ${user.memId}"></span>
+        </p>
+        <p>
+            <label>PW : </label>
+            <input type="password" th:name="memPwd" th:value="${user.memPwd}" disabled>
+        </p>
+        <p>
+            <label>이름 : </label>
+            <input type="text" th:name="memName" th:value="${user.memName}" disabled>
+        </p>
+        <p>
+            <label>이메일 : </label>
+            <input type="email" th:name="memEmail" th:value="${user.memEmail}" disabled>
+        </p>
+        <p>
+            <label>주소 : </label>
+            <input type="text" th:name="memAddr" th:value="${user.memAddr}" disabled>
+        </p>
+        <p>
+            <label>생년월일 : </label>
+            <input type="date" th:name="memBirth" th:value="${user.memBirth}" disabled>
+        </p>
+        <p>
+            <label>휴대전화번호 : </label>
+            <input type="text" th:name="memPhone" th:value="${user.memPhone}" disabled>
+        </p>
+        <p>
+            <label>발 사이즈 : </label>
+            <input type="text" th:name="memShsize" th:value="${user.memShsize}" disabled>
+        </p>
+<!--        <p th:text="'이름 : ' + ${user.memName}"></p>
+        <p th:text= "'이메일 : ' + ${user.memEmail}"></p>
+        <p th:text="'휴대전화번호 : ' + ${user.memPhone}"></p>
+        <p th:text="'주소 : ' + ${user.memAddr}"></p>
+        <p th:text="'생년월일 : ' + ${user.memBirth}"></p>
+        <p th:text="'발 사이즈 : ' + ${user.memShsize}"></p>-->
+        <button type="button">수정</button>
+        <button type="submit" class="hidden">저장</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+    <h1>회원 가입 결과</h1>
+
+    <!-- Success Message -->
+    <div th:if="${isSuccess}" class="success">
+        회원 가입 성공
+    </div>
+
+    <!-- Failure Message -->
+    <div th:if="${!isSuccess}" class="failure">
+        회원 가입 실패
+    </div>
+
+    <!-- Error Message -->
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <a href="/teamproject/signin">로그인 화면으로 이동</a>
+</body>
+</html>

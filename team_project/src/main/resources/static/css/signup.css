@@ -1,0 +1,122 @@
+/* Basic resets and styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rubik Wet Paint', serif; /* 폰트 적용 */
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+/* Header Image */
+.header-image {
+    width: 100%;
+    height: 300px; /* Adjust as needed */
+    background: url('/images/MainIndex.jpg') no-repeat center center;
+    background-size: cover;
+    display: block;
+}
+
+/* User Buttons */
+.user-buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+}
+
+.user-buttons a {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #007BFF; /* Link color */
+}
+
+.user-buttons a:hover {
+    text-decoration: underline;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.nav-bar a {
+    color: white;
+    padding: 10px 30px; /* Increased padding for more spacing */
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 10px; /* Additional margin for spacing */
+}
+
+.nav-bar a:hover {
+    background-color: #555;
+}
+
+/* Form Container */
+.form-container {
+    max-width: 400px; /* Limit the width of the form */
+    margin: 20px auto; /* Center the form */
+    padding: 20px;
+    background-color: white; /* White background for form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.form-container h1 {
+    margin-bottom: 20px; /* Space below the heading */
+    text-align: center; /* Center the heading */
+    color: #333;
+}
+
+/* Form Labels */
+.form-container label {
+    display: block;
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Make labels bold */
+    color: black; /* Change label color to black */
+}
+
+/* Form Inputs */
+.form-container input {
+    width: 100%; /* Full width input fields */
+    padding: 10px; /* Padding inside input */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 3px solid black; /* Thicker border (3px) with black color */
+    border-radius: 4px; /* Rounded corners */
+    color: black; /* Change input text color to black */
+}
+
+/* Error Message */
+span {
+    color: red; /* Error message color */
+    display: none; /* Hidden by default */
+}
+
+.form-container button {
+   font-family: 'Rubik Wet Paint';
+    width: 100%; /* Full width button */
+    padding: 10px;
+    background-color: #000; /* Change to black */
+    color: white;
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Larger font */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.form-container button:hover {
+    background-color: #333; /* Darker shade on hover */
+}
+
+
+
+
